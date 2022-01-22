@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import logo from './assets/tet.jpg';
+import MoneyPack from './MoneyPack';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <ImageBackground
+        source={logo}
+        resizeMode='stretch'
+        style={styles.background}>
+        <MoneyPack />
+      </ImageBackground>
     </View>
   );
 }
@@ -13,8 +19,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+  },
+  background: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
