@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Image, StyleSheet, Text, View, Animated, PanResponder, LogBox } from 'react-native';
 import luckyMoney from './assets/baolixi.png';
 
-const MoneyPack = ({ handleOpen }) => {
+const MoneyPack = () => {
   const duration = 500;
 
   useEffect(() => {
@@ -34,16 +34,16 @@ const MoneyPack = ({ handleOpen }) => {
         duration: duration,
         useNativeDriver: true,
       }),
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(pan, { toValue: { x: 0, y: 0 }, duration: 2000, useNativeDriver: true }),
+          Animated.timing(pan, { toValue: { x: 10, y: 0 }, duration: 100, useNativeDriver: true }),
+          Animated.timing(pan, { toValue: { x: -10, y: 0 }, duration: 100, useNativeDriver: true }),
+          Animated.timing(pan, { toValue: { x: 10, y: 0 }, duration: 100, useNativeDriver: true }),
+          Animated.timing(pan, { toValue: 0, duration: 100, useNativeDriver: true })
+        ])
+      )
     ]).start();
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(pan, { toValue: { x: 0, y: 0 }, duration: 2000, useNativeDriver: true }),
-        Animated.timing(pan, { toValue: { x: 10, y: 0 }, duration: 100, useNativeDriver: true }),
-        Animated.timing(pan, { toValue: { x: -10, y: 0 }, duration: 100, useNativeDriver: true }),
-        Animated.timing(pan, { toValue: { x: 10, y: 0 }, duration: 100, useNativeDriver: true }),
-        Animated.timing(pan, { toValue: 0, duration: 100, useNativeDriver: true })
-      ])
-    ).start();
   }, []);
 
   const pan = useRef(new Animated.ValueXY()).current;
@@ -76,7 +76,6 @@ const MoneyPack = ({ handleOpen }) => {
           source={luckyMoney}
         />
       </Animated.View>
-
     </View>
   )
 }
@@ -85,9 +84,12 @@ const styles = StyleSheet.create({
   container: {
     width: 'auto',
     height: 'auto',
-    // shadowOffset: 9,
-    // shadowOpacity: 10,
-    // shadowColor: "black",
+    shadowOffset: {
+      width: 9,
+      height: 6
+    },
+    shadowOpacity: 0.5,
+    shadowColor: "black",
   },
   moneyPack: {
     width: 500,

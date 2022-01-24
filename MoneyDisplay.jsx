@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
 import twenty from './assets/money/20k.png'
 import fifty from './assets/money/50k.jpg'
@@ -7,7 +7,16 @@ import twoHundred from './assets/money/200k.png'
 import { generateMoney } from './utils';
 
 const MoneyDisplay = ({ setIsOpen }) => {
+  const [sound, setSound] = useState();
 
+  useEffect(() => {
+    return sound
+      ? () => {
+        console.log('Unloading Sound');
+        sound.unloadAsync();
+      }
+      : undefined;
+  }, [sound]);
 
   const onPress = () => {
     setIsOpen(false)
@@ -21,12 +30,24 @@ const MoneyDisplay = ({ setIsOpen }) => {
       case '100.000':
         return oneHundred;
       case '200.000':
+        playSound()
         return twoHundred;
       case '20.000':
         return twenty;
       default:
         return fifty
     }
+  }
+
+  async function playSound() {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(
+      require('./assets/congrats.mp3')
+    );
+    setSound(sound);
+
+    console.log('Playing Sound');
+    await sound.playAsync();
   }
 
   return (
@@ -48,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   button: {
-    width: 400,
+    width: 450,
     height: 200,
   },
   money: {
