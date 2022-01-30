@@ -6,7 +6,7 @@ const MoneyPack = () => {
   const duration = 500;
 
   useEffect(() => {
-    LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+    LogBox.ignoreLogs(['Animated.event now requires a second argument for options']);
     Animated.timing(ani, {
       toValue: 1,
       duration: 3000,

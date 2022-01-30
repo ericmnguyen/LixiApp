@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, View, LogBox } from 'react-native';
 import { DeviceMotion } from 'expo-sensors';
 import { Audio } from 'expo-av';
 import logo from './assets/tet.jpg';
@@ -12,7 +12,7 @@ export default function App() {
   const [sound, setSound] = useState();
 
   useEffect(() => {
-    const shakeNumb = 25;
+    const shakeNumb = 30;
     DeviceMotion.addListener((listener) => {
       const { acceleration } = listener;
       if (
@@ -63,6 +63,7 @@ export default function App() {
         style={styles.background}>
         {isOpen ? <MoneyDisplay setIsOpen={setIsOpen} /> : <MoneyPack />}
       </ImageBackground>
+      <StatusBar hidden='true' />
     </View>
   );
 }

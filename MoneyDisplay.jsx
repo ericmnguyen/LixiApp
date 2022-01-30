@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Image } from 'react-native';
 import twenty from './assets/money/20k.png'
 import fifty from './assets/money/50k.jpg'
 import oneHundred from './assets/money/100k.png'
@@ -30,7 +30,6 @@ const MoneyDisplay = ({ setIsOpen }) => {
       case '100.000':
         return oneHundred;
       case '200.000':
-        playSound()
         return twoHundred;
       case '20.000':
         return twenty;
